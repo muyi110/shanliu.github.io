@@ -187,7 +187,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-04 00:18:21" itemprop="dateModified" datetime="2021-01-04T00:18:21+08:00">2021-01-04</time>
+                <time title="修改时间：2021-01-04 00:42:31" itemprop="dateModified" datetime="2021-01-04T00:42:31+08:00">2021-01-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -455,7 +455,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl scale rc kubia --replicas=3</span></span><br></pre></td></tr></table></figure>
 
 <p>下图是扩容后的关系图</p>
-<img src="/images/Kubernetes学习笔记/image-20210102231125231.png" alt="image-20210102231125231" style="zoom:50%;" />
+<img src="images/Kubernetes/image-20210102231125231.png" alt="image-20210102231125231" style="zoom:50%;" />
 
 <p>下图的命令可以查看Pod在哪一个节点上运行，以及Pod的IP</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods -o wide  <span class="comment"># 也可以通过 kubectl describe pod &lt;pod_name&gt;查看</span></span></span><br><span class="line">NAME     READY   STATUS             RESTARTS   AGE    IP           NODE       NOMINATED NODE   READINESS GATES</span><br><span class="line">kubia    0/1     CrashLoopBackOff   15         125m   172.17.0.3   minikube   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kubia1   0/1     ImagePullBackOff   0          49m    172.17.0.4   minikube   &lt;none&gt;           &lt;none&gt;</span><br></pre></td></tr></table></figure>
