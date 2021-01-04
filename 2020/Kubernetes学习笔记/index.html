@@ -27,34 +27,34 @@
 <meta property="og:site_name" content="山柳">
 <meta property="og:description" content="此博客主要关于 Kubernetes in Action 书籍过程中笔记  1 Kubernetes背景  1.1 理解kubernetes的需求早期的单体应用缺点：  牵一发而动全身（开发、发布、…)； 运行在少数可以提供计算能力的高性能服务器上； 系统扩容，垂直扩容（不需要改变程序）增加硬件资源，例如cpu，存储等，但有上限；水平扩容（需要改动代码，增加服务器运行服务的副本）困难；如果某个组">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201129235556776.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201130235722746.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201201002458204.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201201003729919.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203003150464.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203004939261.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203004504984.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203004522048.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203010959130.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206160908559.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206161054003.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206161112691.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206184201388.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206185714894.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201207000224833.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201208012318453.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201213230108106.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201213232658033.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102175922445.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102210302547.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102220759542.png">
-<meta property="og:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102224206466.png">
-<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/2020/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210102231125231.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201129235556776.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201130235722746.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201201002458204.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201201003729919.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203003150464.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203004939261.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203004504984.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203004522048.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201203010959130.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206160908559.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206161054003.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206161112691.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206184201388.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201206185714894.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201207000224833.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201208012318453.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201213230108106.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201213232658033.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102175922445.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102210302547.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102220759542.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210102224206466.png">
+<meta property="og:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20210102231125231.png">
 <meta property="article:published_time" content="2020-11-29T14:53:33.000Z">
-<meta property="article:modified_time" content="2021-01-03T16:49:29.529Z">
+<meta property="article:modified_time" content="2021-01-04T16:01:44.040Z">
 <meta property="article:author" content="山柳">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://muyi110.github.io/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201129235556776.png">
+<meta name="twitter:image" content="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20201129235556776.png">
 
 <link rel="canonical" href="https://muyi110.github.io/shanliu.github.io/2020/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
@@ -212,7 +212,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-04 00:49:29" itemprop="dateModified" datetime="2021-01-04T00:49:29+08:00">2021-01-04</time>
+                <time title="修改时间：2021-01-05 00:01:44" itemprop="dateModified" datetime="2021-01-05T00:01:44+08:00">2021-01-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +238,7 @@
         <blockquote>
 <p>此博客主要关于 <em>Kubernetes in Action</em> 书籍过程中笔记</p>
 </blockquote>
-<h1 id="1-Kubernetes背景"><a href="#1-Kubernetes背景" class="headerlink" title="1 Kubernetes背景"></a>1 Kubernetes背景</h1><img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201129235556776.png" alt="image-20201129235556776" style="zoom:45%;" />
+<h1 id="1-Kubernetes背景"><a href="#1-Kubernetes背景" class="headerlink" title="1 Kubernetes背景"></a>1 Kubernetes背景</h1><img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201129235556776.png" alt="image-20201129235556776" style="zoom:45%;" />
 
 <h2 id="1-1-理解kubernetes的需求"><a href="#1-1-理解kubernetes的需求" class="headerlink" title="1.1 理解kubernetes的需求"></a>1.1 理解<em>kubernetes</em>的需求</h2><p>早期的单体应用缺点：</p>
 <ol>
@@ -247,10 +247,10 @@
 <li>系统扩容，垂直扩容（不需要改变程序）增加硬件资源，例如cpu，存储等，但有上限；水平扩容（需要改动代码，增加服务器运行服务的副本）困难；如果某个组件不能扩容，则整个服务不可扩容。</li>
 </ol>
 <p>基于上述问题，需要将单体服务拆为微服务，每个微服务作为独立的程序运行，互不影响，之间通过API通信，如下图所示。微服务通信通过同步同步协议，例如HTTP，或者异步协议，例如AMQP（Advanced Message Queueing Protocol）。每个微服务可以用不同的语言开发。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201130235722746.png" alt="image-20201130235722746" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201130235722746.png" alt="image-20201130235722746" style="zoom:50%;" />
 
 <p>微服务扩容是基于每个微服务的，也就是说可以只扩容需要扩容的微服务。有些服务可以水平扩容，有些可以垂直扩容，如下图所示。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201201002458204.png" alt="image-20201201002458204" style="zoom:40%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201201002458204.png" alt="image-20201201002458204" style="zoom:40%;" />
 
 <p>微服务存在缺点：</p>
 <ol>
@@ -258,19 +258,19 @@
 <li>跟踪调试问题变得困难，因为不同的微服务可能在不同的服务器上。</li>
 </ol>
 <p>微服务开发和部署可以独立进行，也就是说不同的微服务可以由不同的团队负责，这样不同的微服务环境依赖存在差异是必然的，如下图所示。在相同的服务器上部署的微服务越多，将是越困难的去提供满足所有微服务的依赖环境。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201201003729919.png" alt="image-20201201003729919" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201201003729919.png" alt="image-20201201003729919" style="zoom:50%;" />
 
 <p>开发环境和生产环境的差异性（包括硬件，系统，软件库等），以及生产机器环境的变化是实际中需要处理的问题。解决方法是开发环境和生产环境一致，开发者部署服务，op管理硬件等资源。因此Kubernetes登场了，Kubernetes对实际硬件做抽象，然后将自身暴露成一个平台，用于部署和运行应用程序。它允许开发者自己 配置和部署应用程序，而不需要op的任何帮助 让op聚焦于保持 底层基础设施运转正常的同时，不需要关注实际运行在平台上的应用程序。</p>
 <h2 id="1-2-容器技术"><a href="#1-2-容器技术" class="headerlink" title="1.2 容器技术"></a>1.2 容器技术</h2><p>Kubernetes使用Linux容器技术隔离应用程序。运行在容器里面的进程实际运行在宿主机的操作系统上（可以看成宿主机上的一个进程，和虚拟机VM不一样，VM里的进程是运行的独立的操作系统）。下图对比了VM和容器运行多个微服务，由于VM比较吃资源，一台机器不会有很多VM，所以需要将微服务分组，分别在VM里面运行；容器比较轻量，每一个容器可以用来跑一个微服务。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201203003150464.png" alt="image-20201203003150464" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201203003150464.png" alt="image-20201203003150464" style="zoom:50%;" />
 
 <p>运行在虚拟机里的应用程序会执行<code>Guest OS</code>的系统调用， 然后VM内核会通过管理程序在宿主机上的物理CPU执行x86指令。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201203004939261.png" alt="image-20201203004939261" style="zoom:40%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201203004939261.png" alt="image-20201203004939261" style="zoom:40%;" />
 
 <p>所有的容器在宿主机上的内核执行系统调用，CPU不需要做任何虚拟化（这点和VM不一样），下图显示了VM中的应用和容器中的应用使用CPU的差异。</p>
-<p><img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201203004504984.png" alt="image-20201203004504984" style="zoom:35%;" /><img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201203004522048.png" alt="image-20201203004522048" style="zoom:35%;" /></p>
+<p><img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201203004504984.png" alt="image-20201203004504984" style="zoom:35%;" /><img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201203004522048.png" alt="image-20201203004522048" style="zoom:35%;" /></p>
 <p>总结容器和VM的差异如下：</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201203010959130.png" alt="image-20201203010959130" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201203010959130.png" alt="image-20201203010959130" style="zoom:50%;" />
 
 <p>容器实现隔离的机制：Linux namespaces和Linux control groups (croups)。</p>
 <p>Linux namespaces: 使得每个进程只看到自己的系统视图（files, processes, network interfaces, hostname, and so on）；</p>
@@ -282,21 +282,21 @@
 <li>容器：基于镜像的Linux容器，一个正在运行的容器是运行Docker宿主机上的一个进程（和其他进程完全隔离）。</li>
 </ol>
 <p>下图显示了构建，发布，运行Docker镜像的流程：</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201206160908559.png" alt="image-20201206160908559" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201206160908559.png" alt="image-20201206160908559" style="zoom:50%;" />
 
 <p>Docker容器和虚拟机的差异如下图所示：</p>
-<p><img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201206161054003.png" alt="image-20201206161054003" style="zoom:50%;" /><img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201206161112691.png" alt="image-20201206161112691" style="zoom:47%;" /></p>
+<p><img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201206161054003.png" alt="image-20201206161054003" style="zoom:50%;" /><img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201206161112691.png" alt="image-20201206161112691" style="zoom:47%;" /></p>
 <p>图中可以看到，app A和app B可以访问相同的二进制文件和库，对于VM显而易见（因为都在同一个操作系统里面），但是容器都有其自己隔离的文件系统，为什么会这样呢？因为Docker镜像是由层组成，不同的镜像可以包含相同的层（底层），层的好处包含加速镜像发布效率，节约存储空间（每一层只会存储一份）。所以基于不同的镜像运行的Docker容器可以读相同的文件（这些相同的文件就是底层），但是一个容器写这些文件，另一个容器是不能看到修改后的变化的，因此容器之间是互相隔离的（This works because container image layers are read-only. When a container is run, a new writable layer is created on top of the layers in the image. When the process in the container writes to a file located in one of the underlying layers, a copy of the whole file is created in the top-most layer and the process writes to the copy）。</p>
 <p>容器镜像的限制：运行在宿主机上的容器共享宿主机上的Linux内核，如果容器需要的内核版本和宿主机上的不同，容器可能不能正常工作，同时也会受到硬件架构的影响（比如x86和ARM），VM没有这种限制，因为VM有其自己独立的内核。</p>
 <p>Docker本身并不能提供隔离，只是利用Linux namespaces和Linux control groups (croups)，Docker只是容器的一种，还有其他容器，后面只是针对Docke进行说明。</p>
 <h2 id="1-3-Kubernetes介绍"><a href="#1-3-Kubernetes介绍" class="headerlink" title="1.3 Kubernetes介绍"></a>1.3 Kubernetes介绍</h2><p>当机器规模大了后，即使利用率小的改善也会带来可观的收益。早期谷歌内部开发了Borg和Omega系统，后来在2014年，基于早起的经验，谷歌开源了Kubernetes（一个软件系统，抽象硬件资源，使其容易发布管理基于容器的应用）。</p>
 <p>下图显示了Kubernetes的简单视图，由一个master节点和众多worker节点组成。开发者提交软件清单到master节点，Kubernetes将其发布到worker节点的集群。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201206184201388.png" alt="image-20201206184201388" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201206184201388.png" alt="image-20201206184201388" style="zoom:50%;" />
 
 <p>节点是Kubernetes里的最小计算单元，可以理解为一台机器，是物理机或者虚拟机。</p>
 <p>可以将Kubernetes看出集群的操作系统，Kubernetes提供一些基础服务包括：服务发现，扩容，负载均衡，自愈，甚至领导选举等。同时Kubernetes可以对应用重新分配，提高资源的利用率。</p>
 <p>下面开始介绍Kubernetes集群的架构。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201206185714894.png" alt="image-20201206185714894" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201206185714894.png" alt="image-20201206185714894" style="zoom:50%;" />
 
 <p>在硬件层面，Kubernetes集群由许多节点组成，分为两类，master节点和worker节点。</p>
 <ul>
@@ -317,7 +317,7 @@
 <li>The <em>Kubernetes Service Proxy (kube-proxy)</em>：负责组件之间的负载均衡网络流量</li>
 </ul>
 <p>在Kubernetes中运行一个应用。流程：将应用打包成一个或多个镜像–&gt;将镜像推倒镜像仓库–&gt;给Kubernetes API server推送一个描述文件。描述文件包括容器镜像信息，多少副本，哪些需要运行在同一个节点上等等。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201207000224833.png" alt="image-20201207000224833" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201207000224833.png" alt="image-20201207000224833" style="zoom:50%;" />
 
 <p>当API server处理应用的描述文件时，the Scheduler基于每组容器需要的计算资源以及工作节点非分配的资源调度指定组容器运行在可用的节点上。在节点上的Kubelet指示Container Runtime（例如Docker）拉取容器镜像并运行容器。</p>
 <p><strong>保活</strong>：一旦应用运行起来，Kubernetes会持续确保部署的应用状态会满足描述文件里规定的。例如，如果在描述文件里面指定一个服务有5个副本运行，则Kubernetes总是确保有5个副本服务运行，一旦某个服务意外死掉了，则Kubernetes会自动重启服务。如果整个工作节点死掉或不可访问了，Kubernetes会在新的节点上运行在死掉节点上的所有容器。</p>
@@ -340,7 +340,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Unable to find image 'busybox:latest' locally</span><br><span class="line">latest: Pulling from library/busybox</span><br><span class="line">ea97eb0eb3ec: Pull complete</span><br><span class="line">Digest: sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678</span><br><span class="line">Status: Downloaded newer image for busybox:latest</span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
 
 <p>下图显示了上述Docker run命令的执行流程</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201208012318453.png" alt="image-20201208012318453" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201208012318453.png" alt="image-20201208012318453" style="zoom:50%;" />
 
 <p>运行Docker镜像命令如下（最基本的，没有加参数或者命令）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run &lt;images&gt; 或者 sudo docker run &lt;image&gt;:&lt;tag&gt;</span><br></pre></td></tr></table></figure>
@@ -349,11 +349,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build -t &lt;image_name&gt; .</span><br></pre></td></tr></table></figure>
 
 <p>下图显示了上面docker build命令的执行流程</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201213230108106.png" alt="image-20201213230108106" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201213230108106.png" alt="image-20201213230108106" style="zoom:50%;" />
 
 <p>build命令告诉Docker基于当前目录里的内容构建一个<image_name>镜像，Docker会在当前目录查找Dockerfile文件，基于Dockerfile文件里面的命令构建镜像。注意，镜像的构建操作不是由Docker客户端完成，而是由守护进程完成，客户端会将整个目录上传到Docker守护进程中。Docker客户端和守护进程不需要运行在同一台机器上。</p>
 <p>Docker镜像是由很多层组成，不同的镜像可以共享某些层。镜像中的每一层只会存储一份。构建镜像的过程中，基于Dockerfile文件里的每一行命令都会在最上面创建一个新的层，下图显示了构建镜像过程中层的关系</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20201213232658033.png" alt="image-20201213232658033" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201213232658033.png" alt="image-20201213232658033" style="zoom:50%;" />
 
 <p>列举本地所有的镜像命令如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo docker images 或者 sudo docker image ls</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">busybox             latest              219ee5171f80        9 days ago          1.23MB</span><br><span class="line">tomcat              latest              2703bbe9e9d4        4 weeks ago         648MB</span><br><span class="line">nginx               latest              c39a868aad02        5 weeks ago         133MB</span><br><span class="line">centos              latest              0d120b6ccaa8        4 months ago        215MB</span><br></pre></td></tr></table></figure>
@@ -436,7 +436,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl cluster-info</span></span><br><span class="line">Kubernetes control plane is running at https://192.168.39.225:8443</span><br><span class="line">KubeDNS is running at https://192.168.39.225:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy</span><br><span class="line"></span><br><span class="line">To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.</span><br></pre></td></tr></table></figure>
 
 <p>下面说明了如何和Kubernetes集群交互（3个节点）</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20210102175922445.png" alt="image-20210102175922445" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20210102175922445.png" alt="image-20210102175922445" style="zoom:50%;" />
 
 <p>每一个节点都运行Docker、Kubelet、kube-proxy，通过<code>kubectl</code>客户端和集群交互。</p>
 <p>列举集群中的节点</p>
@@ -447,7 +447,7 @@
 
 <h2 id="2-3-在kubernetes上运行第一个程序"><a href="#2-3-在kubernetes上运行第一个程序" class="headerlink" title="2.3 在kubernetes上运行第一个程序"></a>2.3 在kubernetes上运行第一个程序</h2><p><strong>Pod</strong>: 一组紧密相关的容器，它们总是一起运行在同一个工作节点上，以及在同一个Linux命名空间。</p>
 <p>每一个Pod像一个独立的逻辑机器，有其自己的IP，主机名，进程等，运行一个独立的应用。一个Pod里面的所有容器，似乎运行在相同的逻辑机器上，在其他Pod里面的容器（即使实际运行在同一个工作节点上）似乎运行在不同的逻辑机器上。下图显示了Pod，容器和节点间的关系。</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20210102210302547.png" alt="image-20210102210302547" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20210102210302547.png" alt="image-20210102210302547" style="zoom:50%;" />
 
 <p>Kubernetes中不能列举单个容器，但是可以列举Pods，用如下命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods</span></span><br><span class="line">NAME    READY   STATUS              RESTARTS   AGE</span><br><span class="line">kubia   0/1     ContainerCreating   0          21s</span><br></pre></td></tr></table></figure>
@@ -456,7 +456,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl describe pod kubia</span></span><br></pre></td></tr></table></figure>
 
 <p>下图显示了在集群上运行容器镜像的过程</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20210102220759542.png" alt="image-20210102220759542" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20210102220759542.png" alt="image-20210102220759542" style="zoom:50%;" />
 
 <p>分2步，第一步是构建镜像，并将其放到仓库中；第二步，通过kubectl在集群上运行容器镜像。</p>
 <p>访问一个Pod，首先需要通过一个服务对象暴露Pod的IP地址，命令如下</p>
@@ -466,7 +466,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get services</span></span><br></pre></td></tr></table></figure>
 
 <p>下图总结了本小节提到的Replicationcontroller，Pod和服务的关系</p>
-<img src="/Users/yangliuqing/Workspace/Yangliuqing/Blog/source/images/Kubernetes学习笔记//image-20210102224206466.png" alt="image-20210102224206466" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20210102224206466.png" alt="image-20210102224206466" style="zoom:50%;" />
 
 <ul>
 <li>Pod和容器：Pod里面可以包含任意个容器（上面图中是一个），Pod有其自己独立的IP和主机名</li>
@@ -480,7 +480,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl scale rc kubia --replicas=3</span></span><br></pre></td></tr></table></figure>
 
 <p>下图是扩容后的关系图</p>
-<img src="images/Kubernetes学习笔记/image-20210102231125231.png" alt="image-20210102231125231" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记/image-20210102231125231.png" alt="image-20210102231125231" style="zoom:50%;" />
 
 <p>下图的命令可以查看Pod在哪一个节点上运行，以及Pod的IP</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods -o wide  <span class="comment"># 也可以通过 kubectl describe pod &lt;pod_name&gt;查看</span></span></span><br><span class="line">NAME     READY   STATUS             RESTARTS   AGE    IP           NODE       NOMINATED NODE   READINESS GATES</span><br><span class="line">kubia    0/1     CrashLoopBackOff   15         125m   172.17.0.3   minikube   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kubia1   0/1     ImagePullBackOff   0          49m    172.17.0.4   minikube   &lt;none&gt;           &lt;none&gt;</span><br></pre></td></tr></table></figure>
