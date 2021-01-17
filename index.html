@@ -187,7 +187,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-17 23:00:20" itemprop="dateModified" datetime="2021-01-17T23:00:20+08:00">2021-01-17</time>
+                <time title="修改时间：2021-01-17 23:07:59" itemprop="dateModified" datetime="2021-01-17T23:07:59+08:00">2021-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -213,9 +213,9 @@
           <blockquote>
 <p>此博客主要关于 <em>Kubernetes in Action</em> 书籍过程中笔记</p>
 </blockquote>
-<h1 id="1-Kubernetes背景"><a href="#1-Kubernetes背景" class="headerlink" title="1 Kubernetes背景"></a>1 Kubernetes背景</h1><img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201129235556776.png" alt="image-20201129235556776" style="zoom:45%;" />
+<h1 id="Kubernetes背景"><a href="#Kubernetes背景" class="headerlink" title="Kubernetes背景"></a>Kubernetes背景</h1><img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201129235556776.png" alt="image-20201129235556776" style="zoom:45%;" />
 
-<h2 id="1-1-理解kubernetes的需求"><a href="#1-1-理解kubernetes的需求" class="headerlink" title="1.1 理解kubernetes的需求"></a>1.1 理解<em>kubernetes</em>的需求</h2><p>早期的单体应用缺点：</p>
+<h2 id="理解kubernetes的需求"><a href="#理解kubernetes的需求" class="headerlink" title="理解kubernetes的需求"></a>理解<em>kubernetes</em>的需求</h2><p>早期的单体应用缺点：</p>
 <ol>
 <li>牵一发而动全身（开发、发布、…)；</li>
 <li>运行在少数可以提供计算能力的高性能服务器上；</li>
@@ -236,7 +236,7 @@
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201201003729919.png" alt="image-20201201003729919" style="zoom:50%;" />
 
 <p>开发环境和生产环境的差异性（包括硬件，系统，软件库等），以及生产机器环境的变化是实际中需要处理的问题。解决方法是开发环境和生产环境一致，开发者部署服务，op管理硬件等资源。因此Kubernetes登场了，Kubernetes对实际硬件做抽象，然后将自身暴露成一个平台，用于部署和运行应用程序。它允许开发者自己 配置和部署应用程序，而不需要op的任何帮助 让op聚焦于保持 底层基础设施运转正常的同时，不需要关注实际运行在平台上的应用程序。</p>
-<h2 id="1-2-容器技术"><a href="#1-2-容器技术" class="headerlink" title="1.2 容器技术"></a>1.2 容器技术</h2><p>Kubernetes使用Linux容器技术隔离应用程序。运行在容器里面的进程实际运行在宿主机的操作系统上（可以看成宿主机上的一个进程，和虚拟机VM不一样，VM里的进程是运行的独立的操作系统）。下图对比了VM和容器运行多个微服务，由于VM比较吃资源，一台机器不会有很多VM，所以需要将微服务分组，分别在VM里面运行；容器比较轻量，每一个容器可以用来跑一个微服务。</p>
+<h2 id="容器技术"><a href="#容器技术" class="headerlink" title="容器技术"></a>容器技术</h2><p>Kubernetes使用Linux容器技术隔离应用程序。运行在容器里面的进程实际运行在宿主机的操作系统上（可以看成宿主机上的一个进程，和虚拟机VM不一样，VM里的进程是运行的独立的操作系统）。下图对比了VM和容器运行多个微服务，由于VM比较吃资源，一台机器不会有很多VM，所以需要将微服务分组，分别在VM里面运行；容器比较轻量，每一个容器可以用来跑一个微服务。</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201203003150464.png" alt="image-20201203003150464" style="zoom:50%;" />
 
 <p>运行在虚拟机里的应用程序会执行<code>Guest OS</code>的系统调用， 然后VM内核会通过管理程序在宿主机上的物理CPU执行x86指令。</p>
@@ -264,7 +264,7 @@
 <p>图中可以看到，app A和app B可以访问相同的二进制文件和库，对于VM显而易见（因为都在同一个操作系统里面），但是容器都有其自己隔离的文件系统，为什么会这样呢？因为Docker镜像是由层组成，不同的镜像可以包含相同的层（底层），层的好处包含加速镜像发布效率，节约存储空间（每一层只会存储一份）。所以基于不同的镜像运行的Docker容器可以读相同的文件（这些相同的文件就是底层），但是一个容器写这些文件，另一个容器是不能看到修改后的变化的，因此容器之间是互相隔离的（This works because container image layers are read-only. When a container is run, a new writable layer is created on top of the layers in the image. When the process in the container writes to a file located in one of the underlying layers, a copy of the whole file is created in the top-most layer and the process writes to the copy）。</p>
 <p>容器镜像的限制：运行在宿主机上的容器共享宿主机上的Linux内核，如果容器需要的内核版本和宿主机上的不同，容器可能不能正常工作，同时也会受到硬件架构的影响（比如x86和ARM），VM没有这种限制，因为VM有其自己独立的内核。</p>
 <p>Docker本身并不能提供隔离，只是利用Linux namespaces和Linux control groups (croups)，Docker只是容器的一种，还有其他容器，后面只是针对Docke进行说明。</p>
-<h2 id="1-3-Kubernetes介绍"><a href="#1-3-Kubernetes介绍" class="headerlink" title="1.3 Kubernetes介绍"></a>1.3 Kubernetes介绍</h2><p>当机器规模大了后，即使利用率小的改善也会带来可观的收益。早期谷歌内部开发了Borg和Omega系统，后来在2014年，基于早起的经验，谷歌开源了Kubernetes（一个软件系统，抽象硬件资源，使其容易发布管理基于容器的应用）。</p>
+<h2 id="Kubernetes介绍"><a href="#Kubernetes介绍" class="headerlink" title="Kubernetes介绍"></a>Kubernetes介绍</h2><p>当机器规模大了后，即使利用率小的改善也会带来可观的收益。早期谷歌内部开发了Borg和Omega系统，后来在2014年，基于早起的经验，谷歌开源了Kubernetes（一个软件系统，抽象硬件资源，使其容易发布管理基于容器的应用）。</p>
 <p>下图显示了Kubernetes的简单视图，由一个master节点和众多worker节点组成。开发者提交软件清单到master节点，Kubernetes将其发布到worker节点的集群。</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20201206184201388.png" alt="image-20201206184201388" style="zoom:50%;" />
 
@@ -306,7 +306,7 @@
 <li>自动扩缩容</li>
 <li>简化应用的开发</li>
 </ul>
-<h1 id="2-Docker和Kubernetes的第一步"><a href="#2-Docker和Kubernetes的第一步" class="headerlink" title="2 Docker和Kubernetes的第一步"></a>2 Docker和Kubernetes的第一步</h1><h2 id="2-1-创建，运行及共享容器镜像"><a href="#2-1-创建，运行及共享容器镜像" class="headerlink" title="2.1 创建，运行及共享容器镜像"></a>2.1 创建，运行及共享容器镜像</h2><p>在Kubernetes里面运行的容器镜像需要被打包成容器镜像。首先对Docker的使用做简单的介绍。</p>
+<h1 id="Docker和Kubernetes的第一步"><a href="#Docker和Kubernetes的第一步" class="headerlink" title="Docker和Kubernetes的第一步"></a>Docker和Kubernetes的第一步</h1><h2 id="创建，运行及共享容器镜像"><a href="#创建，运行及共享容器镜像" class="headerlink" title="创建，运行及共享容器镜像"></a>创建，运行及共享容器镜像</h2><p>在Kubernetes里面运行的容器镜像需要被打包成容器镜像。首先对Docker的使用做简单的介绍。</p>
 <p>首先需要在Linux机器上安装Docker，如果不是Linux系统，需要安装Linux虚拟机运行Docker，如果是Mac或者Windows系统，Docker会自己启动一个虚拟机，并在其中运行Docker守护进程。Docker客户端可执行文件可以在宿主机系统上运行，并与在虚拟机中的Docker守护进程通信。</p>
 <p><a href="http://docs.docker.com/engine/installation/" target="_blank" rel="noopener">安装官方地址</a>，完成安装后，使用Docker客户端完成各种Docker命令。 下面命令运行busybox镜像并打印 Hello world</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run busybox echo "Hello world"</span><br></pre></td></tr></table></figure>
@@ -378,7 +378,7 @@
 <p>将镜像推倒远程仓库（之前需要 docker login）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker push label/busybox</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-2-配置Kubernetes集群"><a href="#2-2-配置Kubernetes集群" class="headerlink" title="2.2 配置Kubernetes集群"></a>2.2 配置Kubernetes集群</h2><p>接下来介绍2种简单的方式构建可运行的Kubernetes集群：在本机上运行的单节点的Kubernetes集群和访问一个运行在 Google Kuberne- tes Engine (GKE) 上的托管集群。当然还有其他的方式安装集群，例如利用<code>kubeadm</code>工具和<code>kops</code>工具（AWS）。</p>
+<h2 id="配置Kubernetes集群"><a href="#配置Kubernetes集群" class="headerlink" title="配置Kubernetes集群"></a>配置Kubernetes集群</h2><p>接下来介绍2种简单的方式构建可运行的Kubernetes集群：在本机上运行的单节点的Kubernetes集群和访问一个运行在 Google Kuberne- tes Engine (GKE) 上的托管集群。当然还有其他的方式安装集群，例如利用<code>kubeadm</code>工具和<code>kops</code>工具（AWS）。</p>
 <p>首先是利用<code>Minikube</code>工具在本机上运行一个单节点的Kubernetes集群，<code>Minikube</code>是最简单，最快捷的运行Kubernetes集群的方式。<code>Minikube</code>是一个构建单节点集群的工具，对于本地开发和测试Kubernetes集群都很有帮助。</p>
 <p><code>Minikube</code>是一个需要下载并放到路径中的二进制文件，地址是<code>http://github.com/kubernetes/minikube</code>，例如在Linux系统上，利用下面命令进行下载和配置：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -Lo minikube https://storage.googleapis.com/minikube/releases/v1.15.0/minikube-linux-amd64</span><br><span class="line">sudo chmod +x minikube</span><br><span class="line">sudo mv minikube /usr/local/bin/</span><br></pre></td></tr></table></figure>
@@ -420,7 +420,7 @@
 <p>查看某个Kubernetes对象的详细信息，不加对象的名字，输出所有对象的信息</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe node minikube</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-3-在kubernetes上运行第一个程序"><a href="#2-3-在kubernetes上运行第一个程序" class="headerlink" title="2.3 在kubernetes上运行第一个程序"></a>2.3 在kubernetes上运行第一个程序</h2><p><strong>Pod</strong>: 一组紧密相关的容器，它们总是一起运行在同一个工作节点上，以及在同一个Linux命名空间。</p>
+<h2 id="在kubernetes上运行第一个程序"><a href="#在kubernetes上运行第一个程序" class="headerlink" title="在kubernetes上运行第一个程序"></a>在kubernetes上运行第一个程序</h2><p><strong>Pod</strong>: 一组紧密相关的容器，它们总是一起运行在同一个工作节点上，以及在同一个Linux命名空间。</p>
 <p>每一个Pod像一个独立的逻辑机器，有其自己的IP，主机名，进程等，运行一个独立的应用。一个Pod里面的所有容器，似乎运行在相同的逻辑机器上，在其他Pod里面的容器（即使实际运行在同一个工作节点上）似乎运行在不同的逻辑机器上。下图显示了Pod，容器和节点间的关系。</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes学习笔记//image-20210102210302547.png" alt="image-20210102210302547" style="zoom:50%;" />
 
@@ -463,7 +463,7 @@
 <p>如果使用minikube，通过下面的命令打开dashboard</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> minikube dashboard</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="3-Pods-在Kubernetes上运行容器"><a href="#3-Pods-在Kubernetes上运行容器" class="headerlink" title="3 Pods: 在Kubernetes上运行容器"></a>3 Pods: 在Kubernetes上运行容器</h1><h2 id="3-1-Pod简介"><a href="#3-1-Pod简介" class="headerlink" title="3.1 Pod简介"></a>3.1 Pod简介</h2><p>Pod是一组相关的容器，是Kubernetes的基本组成部分，在Kubernetes上并不是直接操作容器，而是Pod。一个Pod包含一个或多个容器，当一个Pod包含多个容器的时候，所有的容器都运行在一个相同的节点上，不会跨节点，如下图所示</p>
+<h1 id="Pods-在Kubernetes上运行容器"><a href="#Pods-在Kubernetes上运行容器" class="headerlink" title="Pods: 在Kubernetes上运行容器"></a>Pods: 在Kubernetes上运行容器</h1><h2 id="Pod简介"><a href="#Pod简介" class="headerlink" title="Pod简介"></a>Pod简介</h2><p>Pod是一组相关的容器，是Kubernetes的基本组成部分，在Kubernetes上并不是直接操作容器，而是Pod。一个Pod包含一个或多个容器，当一个Pod包含多个容器的时候，所有的容器都运行在一个相同的节点上，不会跨节点，如下图所示</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210105002032549.png" alt="image-20210105002032549" style="zoom:50%;" />
 
 <p>推荐一个容器里面只运行一个进程（一个应用），对于多个进程的应用（需要多个容器）需要一个上层的结构把多个容器作为一个单元进行管理，这个上层的结构就是Pod。一个包含容器的Pod可以运行紧密相关的多个进程，给他们提供相同的环境，就像运行在一个容器里面一样，同时在某种程度上保证了隔离。</p>
@@ -490,7 +490,7 @@
 <p><strong>一般来说一个Pod里面运行一个容器</strong>，除非有特殊的原因，下图是上面例子的说明</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210106222244565.png" alt="image-20210106222244565" style="zoom:50%;" />
 
-<h2 id="3-2-从YAML或者JSON文件创建Pod"><a href="#3-2-从YAML或者JSON文件创建Pod" class="headerlink" title="3.2 从YAML或者JSON文件创建Pod"></a>3.2 从YAML或者JSON文件创建Pod</h2><p>从yaml文件或者json文件可以创建Pod，通过将文件post到Kubernetes REST API。配置所有种类的资源，需要理解Kubernetes API对象定义，<a href="http://kubernetes.io/docs/reference/" target="_blank" rel="noopener">参考官方网址</a>。</p>
+<h2 id="从YAML或者JSON文件创建Pod"><a href="#从YAML或者JSON文件创建Pod" class="headerlink" title="从YAML或者JSON文件创建Pod"></a>从YAML或者JSON文件创建Pod</h2><p>从yaml文件或者json文件可以创建Pod，通过将文件post到Kubernetes REST API。配置所有种类的资源，需要理解Kubernetes API对象定义，<a href="http://kubernetes.io/docs/reference/" target="_blank" rel="noopener">参考官方网址</a>。</p>
 <p>使用下面的命令查看一个Pod的全部YAML定义</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po kubia-dlzv4 -o yaml <span class="comment"># 如果看json返回格式的使用命令 kubectl get po kubia-dlzv4 -o json</span></span></span><br></pre></td></tr></table></figure>
 
@@ -530,7 +530,7 @@
 <p>下图是Pod转发的示意图</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210110230958833.png" alt="image-20210110230958833" style="zoom:50%;" />
 
-<h2 id="3-3-利用标签组织Pods"><a href="#3-3-利用标签组织Pods" class="headerlink" title="3.3 利用标签组织Pods"></a>3.3 利用标签组织Pods</h2><p>随着在集群上运行的Pod越来越多（或者其他的Kubernetes对象），有必要对其进程组织分类，可以通过<code>labels</code>实现</p>
+<h2 id="利用标签组织Pods"><a href="#利用标签组织Pods" class="headerlink" title="利用标签组织Pods"></a>利用标签组织Pods</h2><p>随着在集群上运行的Pod越来越多（或者其他的Kubernetes对象），有必要对其进程组织分类，可以通过<code>labels</code>实现</p>
 <p><code>labels</code>是一种简单但功能强大的Kubernetes功能，不仅可以组织容器，还可以组织所有其他Kubernetes资源，标签是一个附加到资源上的任意的键-值对。标签选择器通过标签选择资源，一个资源可以有多个标签，标签的key是唯一的。通常创建资源的时候会附加一个标签，之后也可以添加附加的标签或者修改标签的值，而不必要重新创建资源。</p>
 <p>下面是给众多Pods加标签的例子，通过标签使得系统结构更加清新，下面的每一个Pod都有2个label</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210113000947943.png" alt="image-20210113000947943" style="zoom:50%;" />
@@ -557,7 +557,7 @@
 <p>下面的命令是修改Pod kubia-manual-v2 的 env=prod 标签为 env=debug</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl label po kubia-manual-v2 env=debug --overwrite</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="3-4-通过标签选择器列举Pod的子集"><a href="#3-4-通过标签选择器列举Pod的子集" class="headerlink" title="3.4 通过标签选择器列举Pod的子集"></a>3.4 通过标签选择器列举Pod的子集</h2><p> 标签选择器可以根据某些特定的标签选择Pod的子集，进而在选择的Pod的进行操作。标签选择器可以根据下面3种资源情况进行选择</p>
+<h2 id="通过标签选择器列举Pod的子集"><a href="#通过标签选择器列举Pod的子集" class="headerlink" title="通过标签选择器列举Pod的子集"></a>通过标签选择器列举Pod的子集</h2><p> 标签选择器可以根据某些特定的标签选择Pod的子集，进而在选择的Pod的进行操作。标签选择器可以根据下面3种资源情况进行选择</p>
 <ul>
 <li>包含（或者不包含）带有特定key的标签；</li>
 <li>包含带有特定key和value的标签；</li>
@@ -582,10 +582,10 @@
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210116225057601.png" alt="image-20210116225057601" style="zoom:50%;" />
 
 <p>当然，标签选择器可以使用多个条件规则，每一个条件都必须满足才会选择，下图显示了同时满足<code>app=pc,rel=beta</code>的条件的Pod</p>
-<img src="/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210116225406676.png" alt="image-20210116225406676" style="zoom:50%;" />
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210116225406676.png" alt="image-20210116225406676" style="zoom:50%;" />
 
 <p>标签选择器不仅仅可以查看某些Pod，也可以在选择的Pod上执行某些操作，例如后面会展示利用标签选择器同时删除多个Pod。</p>
-<h2 id="3-5-利用标签和选择器约束Pod的调度"><a href="#3-5-利用标签和选择器约束Pod的调度" class="headerlink" title="3.5 利用标签和选择器约束Pod的调度"></a>3.5 利用标签和选择器约束Pod的调度</h2><p>有时候需要Pod运作在某些特定的节点上，比如运行在有GPU的节点上，这可以通过描述对节点的要求，让Kubernetes选择符合要求的节点实现。Kubernetes通过节点标签和节点选择器实现选择特定的节点。</p>
+<h2 id="利用标签和选择器约束Pod的调度"><a href="#利用标签和选择器约束Pod的调度" class="headerlink" title="利用标签和选择器约束Pod的调度"></a>利用标签和选择器约束Pod的调度</h2><p>有时候需要Pod运作在某些特定的节点上，比如运行在有GPU的节点上，这可以通过描述对节点的要求，让Kubernetes选择符合要求的节点实现。Kubernetes通过节点标签和节点选择器实现选择特定的节点。</p>
 <p>可以使用标签组织工作节点，标签可以添加到任何Kubernetes对象上，例如节点，Pod等资源。节点添加到集群一般都会给节点一个标签。下面的命令给节点 gke-kubia-85f6-node-0rrx 添加标签<code>gpu=true</code></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl label node gke-kubia-85f6-node-0rrx gpu=<span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
 
@@ -596,14 +596,14 @@
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210117175840479.png" alt="image-20210117175840479" style="zoom:50%;" />
 
 <p>当然，也可以调度一个Pod到一个具体特定的节点，因为每一个节点有一个独一无二标签，其中 key=kubernetes.io/hostname，值是具体的节点的 hostname。注意，当通过 hostname 标签在nodeSelector 字段中指定一个特点的节点，可能会导致Pod不可调度，如果节点是离线的话。<strong>建议：不要设置单个节点</strong></p>
-<h2 id="3-6-注解Pod"><a href="#3-6-注解Pod" class="headerlink" title="3.6 注解Pod"></a>3.6 注解Pod</h2><p>Pod和其他的Kubernetes对象除了可以添加标签，也可以添加注解。注解也是 key-value 对，注解只是起到说明作用的，可以类比代码里面的注释。</p>
+<h2 id="注解Pod"><a href="#注解Pod" class="headerlink" title="注解Pod"></a>注解Pod</h2><p>Pod和其他的Kubernetes对象除了可以添加标签，也可以添加注解。注解也是 key-value 对，注解只是起到说明作用的，可以类比代码里面的注释。</p>
 <p>注解可以在创建Pod的时候添加，也可以在已经存在的Pod上添加或者修改。最简单的方法是使用<code>kubectl annotate</code>命令在已经存在的Pod上添加一个注解。例如下面的命令是在Pod <code>kubia-manual</code>上添加一个注解</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl annotate pod kubia-manual mycompany.com/someannotation=<span class="string">"foo bar"</span></span></span><br><span class="line">pod/kubia-manual annotated</span><br></pre></td></tr></table></figure>
 
 <p>建议使用 mycompany.com/someannotation 格式的key添加注解，以避免 key 的冲突。可以使用 <code>kubectl describe</code>命令查看添加的注解，如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl describe pod kubia-manual</span></span><br><span class="line">Name:         kubia-manual</span><br><span class="line">Namespace:    default</span><br><span class="line">Priority:     0</span><br><span class="line">Node:         minikube/192.168.39.243</span><br><span class="line">Start Time:   Sun, 17 Jan 2021 18:43:25 +0800</span><br><span class="line">Labels:       &lt;none&gt;</span><br><span class="line">Annotations:  mycompany.com/someannotation: foo bar</span><br><span class="line">Status:       Pending</span><br><span class="line">IP:           172.17.0.3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-7-使用命名空间分组资源"><a href="#3-7-使用命名空间分组资源" class="headerlink" title="3.7 使用命名空间分组资源"></a>3.7 使用命名空间分组资源</h2><p>标签可以将资源对象进行分组，由于一个资源对象可以有多个标签，分组是重叠的。使用Kubernetes的命名空间可以将资源分组，且不重叠，在不同的命名空间中，资源可以有相同的名字。使用命名空间可以将资源对象分为不同的环境，比如：开发，测试，线上等。大多数的资源对象都可以使用命名空间，但是有些不能，比如节点资源。</p>
+<h2 id="使用命名空间分组资源"><a href="#使用命名空间分组资源" class="headerlink" title="使用命名空间分组资源"></a>使用命名空间分组资源</h2><p>标签可以将资源对象进行分组，由于一个资源对象可以有多个标签，分组是重叠的。使用Kubernetes的命名空间可以将资源分组，且不重叠，在不同的命名空间中，资源可以有相同的名字。使用命名空间可以将资源对象分为不同的环境，比如：开发，测试，线上等。大多数的资源对象都可以使用命名空间，但是有些不能，比如节点资源。</p>
 <p>使用下面的命令查看集群上所有的命名空间</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get ns</span></span><br><span class="line">NAME              STATUS   AGE</span><br><span class="line">default           Active   3h29m</span><br><span class="line">kube-node-lease   Active   3h30m</span><br><span class="line">kube-public       Active   3h30m</span><br><span class="line">kube-system       Active   3h30m</span><br></pre></td></tr></table></figure>
 
@@ -627,7 +627,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods  <span class="comment"># 默认命令空间</span></span></span><br><span class="line">NAME           READY   STATUS    RESTARTS   AGE</span><br><span class="line">kubia-dmckq    1/1     Running   0          3h35m</span><br><span class="line">kubia-l2mdl    1/1     Running   0          3h35m</span><br><span class="line">kubia-manual   1/1     Running   0          3h36m</span><br><span class="line">kubia-zs8hz    1/1     Running   0          3h35m</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods -n custom-namespace</span></span><br><span class="line">NAME           READY   STATUS    RESTARTS   AGE</span><br><span class="line">kubia-manual   1/1     Running   0          110s</span><br></pre></td></tr></table></figure>
 
 <p><strong>注意：命名空间不提供对正在运行对象的任何隔离，例如在不同命名空间里面的Pod是可以互相通行的</strong></p>
-<h2 id="3-8-停止和删除Pods"><a href="#3-8-停止和删除Pods" class="headerlink" title="3.8 停止和删除Pods"></a>3.8 停止和删除Pods</h2><p>可以直接通过Pod的名字删除Pod</p>
+<h2 id="停止和删除Pods"><a href="#停止和删除Pods" class="headerlink" title="停止和删除Pods"></a>停止和删除Pods</h2><p>可以直接通过Pod的名字删除Pod</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete po kubia-gpu  <span class="comment"># 可以删除多个Pod，通过空格分开 kubectl delete po pod1 pod2</span></span></span><br></pre></td></tr></table></figure>
 
 <p>上述的命令指示Kubernetes终止在删除Pod里面的所有容器。Kubernetes给进程发<code>SIGTERM</code>信号，然后等待一定的时间（默认30s）优雅地删除。如果在等待的时间里没有删除，那么进程会被杀掉通过<code>SIGKILL</code>信号，为了确保进程优雅地退出，需要合理地处理<code>SIGTERM</code>命令。</p>
@@ -645,7 +645,7 @@
 <p>删除命令空间里面的所有资源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete all --all  <span class="comment"># 指定all实际不能删除所有的资源，比如Secrets就需要显示指定删除</span></span></span><br></pre></td></tr></table></figure>
 
-<h1 id="4-Replication-And-other-controllers：部署托管的Pods"><a href="#4-Replication-And-other-controllers：部署托管的Pods" class="headerlink" title="4 Replication And other controllers：部署托管的Pods"></a>4 Replication And other controllers：部署托管的Pods</h1>
+<h1 id="Replication-And-other-controllers：部署托管的Pods"><a href="#Replication-And-other-controllers：部署托管的Pods" class="headerlink" title="Replication And other controllers：部署托管的Pods"></a>Replication And other controllers：部署托管的Pods</h1>
       
     </div>
 
