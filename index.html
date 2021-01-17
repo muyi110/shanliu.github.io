@@ -187,7 +187,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-09 23:32:43" itemprop="dateModified" datetime="2021-01-09T23:32:43+08:00">2021-01-09</time>
+                <time title="修改时间：2021-01-17 23:00:20" itemprop="dateModified" datetime="2021-01-17T23:00:20+08:00">2021-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -463,7 +463,7 @@
 <p>如果使用minikube，通过下面的命令打开dashboard</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> minikube dashboard</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="3-Pods-在Kubernetes上运行容器"><a href="#3-Pods-在Kubernetes上运行容器" class="headerlink" title="3 Pods: 在Kubernetes上运行容器"></a>3 Pods: 在Kubernetes上运行容器</h1><p>Pod是一组相关的容器，是Kubernetes的基本组成部分，在Kubernetes上并不是直接操作容器，而是Pod。一个Pod包含一个或多个容器，当一个Pod包含多个容器的时候，所有的容器都运行在一个相同的节点上，不会跨节点，如下图所示</p>
+<h1 id="3-Pods-在Kubernetes上运行容器"><a href="#3-Pods-在Kubernetes上运行容器" class="headerlink" title="3 Pods: 在Kubernetes上运行容器"></a>3 Pods: 在Kubernetes上运行容器</h1><h2 id="3-1-Pod简介"><a href="#3-1-Pod简介" class="headerlink" title="3.1 Pod简介"></a>3.1 Pod简介</h2><p>Pod是一组相关的容器，是Kubernetes的基本组成部分，在Kubernetes上并不是直接操作容器，而是Pod。一个Pod包含一个或多个容器，当一个Pod包含多个容器的时候，所有的容器都运行在一个相同的节点上，不会跨节点，如下图所示</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210105002032549.png" alt="image-20210105002032549" style="zoom:50%;" />
 
 <p>推荐一个容器里面只运行一个进程（一个应用），对于多个进程的应用（需要多个容器）需要一个上层的结构把多个容器作为一个单元进行管理，这个上层的结构就是Pod。一个包含容器的Pod可以运行紧密相关的多个进程，给他们提供相同的环境，就像运行在一个容器里面一样，同时在某种程度上保证了隔离。</p>
@@ -490,9 +490,9 @@
 <p><strong>一般来说一个Pod里面运行一个容器</strong>，除非有特殊的原因，下图是上面例子的说明</p>
 <img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210106222244565.png" alt="image-20210106222244565" style="zoom:50%;" />
 
-<p>从yaml文件或者json文件可以创建Pod，通过将文件post到Kubernetes REST API。配置所有种类的资源，需要理解Kubernetes API对象定义，<a href="http://kubernetes.io/docs/reference/" target="_blank" rel="noopener">参考官方网址</a>。</p>
+<h2 id="3-2-从YAML或者JSON文件创建Pod"><a href="#3-2-从YAML或者JSON文件创建Pod" class="headerlink" title="3.2 从YAML或者JSON文件创建Pod"></a>3.2 从YAML或者JSON文件创建Pod</h2><p>从yaml文件或者json文件可以创建Pod，通过将文件post到Kubernetes REST API。配置所有种类的资源，需要理解Kubernetes API对象定义，<a href="http://kubernetes.io/docs/reference/" target="_blank" rel="noopener">参考官方网址</a>。</p>
 <p>使用下面的命令查看一个Pod的全部YAML定义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get po kubia-dlzv4 -o yaml</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po kubia-dlzv4 -o yaml <span class="comment"># 如果看json返回格式的使用命令 kubectl get po kubia-dlzv4 -o json</span></span></span><br></pre></td></tr></table></figure>
 
 <p>Pod的定义由几部分组成：在YAML中使用的Kubernetes API的版本；YAML里面描述的资源类型；以及下面的三个部分：</p>
 <ol>
@@ -510,7 +510,142 @@
 <p>当然也可以进一步查看对象属性的解释，如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl explain pod.spec</span></span><br><span class="line">KIND:     Pod</span><br><span class="line">VERSION:  v1</span><br><span class="line"></span><br><span class="line">RESOURCE: spec &lt;Object&gt;</span><br><span class="line"></span><br><span class="line">DESCRIPTION:</span><br><span class="line">     Specification of the desired behavior of the pod. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</span><br><span class="line"></span><br><span class="line">     PodSpec is a description of a pod.</span><br><span class="line"></span><br><span class="line">FIELDS:</span><br><span class="line">   activeDeadlineSeconds	&lt;integer&gt;</span><br><span class="line">     Optional duration in seconds the pod may be active on the node relative to</span><br><span class="line">     StartTime before the system will actively try to mark it failed and kill</span><br><span class="line">     associated containers. Value must be a positive integer.</span><br><span class="line"></span><br><span class="line">   affinity	&lt;Object&gt;</span><br><span class="line">     If specified, the pod's scheduling constraints</span><br><span class="line"></span><br><span class="line">   automountServiceAccountToken	&lt;boolean&gt;</span><br><span class="line">     AutomountServiceAccountToken indicates whether a service account token</span><br><span class="line">     should be automatically mounted.</span><br><span class="line"></span><br><span class="line">   containers	&lt;[]Object&gt; -required-</span><br><span class="line">     List of containers belonging to the pod. Containers cannot currently be</span><br><span class="line">     added or removed. There must be at least one container in a Pod. Cannot be</span><br><span class="line">     updated.</span><br><span class="line"></span><br><span class="line">   .....</span><br><span class="line">   .....</span><br><span class="line"></span><br><span class="line">   volumes	&lt;[]Object&gt;</span><br><span class="line">     List of volumes that can be mounted by containers belonging to the pod.</span><br><span class="line">     More info: https://kubernetes.io/docs/concepts/storage/volumes</span><br></pre></td></tr></table></figure>
 
+<p>使用下面的命令从一个YAML文件创建Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl create -f kubia-manual.yaml  <span class="comment"># kubectl create -f 可以用于创建任何资源，不仅仅是Pod</span></span></span><br></pre></td></tr></table></figure>
 
+<p>查看Kubernetes中Pod的日志是方便的（Pod中只运行一个容器），使用下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl logs kubia-manual</span></span><br><span class="line">Kubia server starting...</span><br></pre></td></tr></table></figure>
+
+<p>容器的日志每天自动轮替（或者大小达到10MB），kubectl logs 命令显示最后一次的轮替。</p>
+<p>如果Pod包含多个容器的时候，当查询日志的时候需要显示指定容器的名字，添加-c <container name>选项，例如下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl logs kubia-manual -c kubia</span></span><br><span class="line">Kubia server starting...</span><br></pre></td></tr></table></figure>
+
+<p>注意：kubectl logs 命令只能查看已存在Pod的日志，当Pod被删除的时候，其日志也被删除。后面的章节会介绍如何查看被删除Pod的日志。</p>
+<p>通过<strong>端口转发</strong>可以访问Pod（通过服务的方式后面会介绍），使用<code>kubectl port-forward</code>命令实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl port-forward kubia-manual 8888:8080  <span class="comment">#  转发本地端口8888到Pod里面的8080端口</span></span></span><br><span class="line">Forwarding from 127.0.0.1:8888 -&gt; 8080</span><br><span class="line">Forwarding from [::1]:8888 -&gt; 8080</span><br></pre></td></tr></table></figure>
+
+<p>在本机打开一个新的终端给Pod一个HTTP请求，如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl localhost:8888</span></span><br></pre></td></tr></table></figure>
+
+<p>下图是Pod转发的示意图</p>
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210110230958833.png" alt="image-20210110230958833" style="zoom:50%;" />
+
+<h2 id="3-3-利用标签组织Pods"><a href="#3-3-利用标签组织Pods" class="headerlink" title="3.3 利用标签组织Pods"></a>3.3 利用标签组织Pods</h2><p>随着在集群上运行的Pod越来越多（或者其他的Kubernetes对象），有必要对其进程组织分类，可以通过<code>labels</code>实现</p>
+<p><code>labels</code>是一种简单但功能强大的Kubernetes功能，不仅可以组织容器，还可以组织所有其他Kubernetes资源，标签是一个附加到资源上的任意的键-值对。标签选择器通过标签选择资源，一个资源可以有多个标签，标签的key是唯一的。通常创建资源的时候会附加一个标签，之后也可以添加附加的标签或者修改标签的值，而不必要重新创建资源。</p>
+<p>下面是给众多Pods加标签的例子，通过标签使得系统结构更加清新，下面的每一个Pod都有2个label</p>
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210113000947943.png" alt="image-20210113000947943" style="zoom:50%;" />
+
+<ul>
+<li>app: 表示Pod属于哪一个app，或者组件或者微服务；</li>
+<li>rel: 表示在Pod里面的应用是稳定版本，beta版本还是 canary release版本</li>
+</ul>
+<p>创建Pod的时候可以指定label，下面的yaml文件指定的创建Pod的2个label，分别是<code>creation_method=manual</code>和<code>env=prod</code></p>
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210113002250294.png" alt="image-20210113002250294" style="zoom:50%;" />
+
+<p>使用下面的命令创建Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl create -f kubia-manual-with-labels.yaml</span></span><br></pre></td></tr></table></figure>
+
+<p>使用下面的命令查看Pod并显示label</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po --show-labels</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以使用<code>-L</code>开关显示某些label，例如下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po -L creation_method,env</span></span><br></pre></td></tr></table></figure>
+
+<p>对于存在的Pod，可以添加或者修改labels，例如下面的命令给 kubia-manual Pod添加 creation_method=manual 标签</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl label po kubia-manual creation_method=manual</span></span><br></pre></td></tr></table></figure>
+
+<p>下面的命令是修改Pod kubia-manual-v2 的 env=prod 标签为 env=debug</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl label po kubia-manual-v2 env=debug --overwrite</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-通过标签选择器列举Pod的子集"><a href="#3-4-通过标签选择器列举Pod的子集" class="headerlink" title="3.4 通过标签选择器列举Pod的子集"></a>3.4 通过标签选择器列举Pod的子集</h2><p> 标签选择器可以根据某些特定的标签选择Pod的子集，进而在选择的Pod的进行操作。标签选择器可以根据下面3种资源情况进行选择</p>
+<ul>
+<li>包含（或者不包含）带有特定key的标签；</li>
+<li>包含带有特定key和value的标签；</li>
+<li>包含带有特定key，但是value不是指定的</li>
+</ul>
+<p>查看带有标签<code>creation_method=manual</code>的所有Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po -l creation_method=manual</span></span><br></pre></td></tr></table></figure>
+
+<p>查看包含 key 是 env 的标签的所有Pod（忽略标签的value）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po -l env</span></span><br></pre></td></tr></table></figure>
+
+<p>查看没有 env 标签的所有Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po -l <span class="string">'!env'</span>  <span class="comment"># 注意 !env 必须在单引号里面</span></span></span><br></pre></td></tr></table></figure>
+
+<p>类似地，可以用下面的标签选择器匹配Pods</p>
+<ul>
+<li><code>creation_method!=manual</code>选择有 creation_method 标签，但是值不是 manual 的Pod;</li>
+<li><code>env in (prod,devel)</code>选择有标签在集合<code>(prod,devel)</code> 中的Pod；</li>
+<li><code>env notin (prod,devel)</code>选择标签不在集合<code>(prod,devel)</code> 中的Pod;</li>
+</ul>
+<p>下图是使用标签选择器的例子</p>
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210116225057601.png" alt="image-20210116225057601" style="zoom:50%;" />
+
+<p>当然，标签选择器可以使用多个条件规则，每一个条件都必须满足才会选择，下图显示了同时满足<code>app=pc,rel=beta</code>的条件的Pod</p>
+<img src="/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210116225406676.png" alt="image-20210116225406676" style="zoom:50%;" />
+
+<p>标签选择器不仅仅可以查看某些Pod，也可以在选择的Pod上执行某些操作，例如后面会展示利用标签选择器同时删除多个Pod。</p>
+<h2 id="3-5-利用标签和选择器约束Pod的调度"><a href="#3-5-利用标签和选择器约束Pod的调度" class="headerlink" title="3.5 利用标签和选择器约束Pod的调度"></a>3.5 利用标签和选择器约束Pod的调度</h2><p>有时候需要Pod运作在某些特定的节点上，比如运行在有GPU的节点上，这可以通过描述对节点的要求，让Kubernetes选择符合要求的节点实现。Kubernetes通过节点标签和节点选择器实现选择特定的节点。</p>
+<p>可以使用标签组织工作节点，标签可以添加到任何Kubernetes对象上，例如节点，Pod等资源。节点添加到集群一般都会给节点一个标签。下面的命令给节点 gke-kubia-85f6-node-0rrx 添加标签<code>gpu=true</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl label node gke-kubia-85f6-node-0rrx gpu=<span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+
+<p>类似地可以用下面的命令显示标签为<code>gpu=true</code>的节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get nodes -l gpu=<span class="literal">true</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令 kubectl get nodes -L gpu 会多显示一列，指示标签key为gpu的值</span></span><br></pre></td></tr></table></figure>
+
+<p>在YAML文件中添加节点选择器，让Kubernetes调度器在指定标签的节点中选择，例如下面的YAML文件，在 spec 下面添加 nodeSelector 字段。</p>
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210117175840479.png" alt="image-20210117175840479" style="zoom:50%;" />
+
+<p>当然，也可以调度一个Pod到一个具体特定的节点，因为每一个节点有一个独一无二标签，其中 key=kubernetes.io/hostname，值是具体的节点的 hostname。注意，当通过 hostname 标签在nodeSelector 字段中指定一个特点的节点，可能会导致Pod不可调度，如果节点是离线的话。<strong>建议：不要设置单个节点</strong></p>
+<h2 id="3-6-注解Pod"><a href="#3-6-注解Pod" class="headerlink" title="3.6 注解Pod"></a>3.6 注解Pod</h2><p>Pod和其他的Kubernetes对象除了可以添加标签，也可以添加注解。注解也是 key-value 对，注解只是起到说明作用的，可以类比代码里面的注释。</p>
+<p>注解可以在创建Pod的时候添加，也可以在已经存在的Pod上添加或者修改。最简单的方法是使用<code>kubectl annotate</code>命令在已经存在的Pod上添加一个注解。例如下面的命令是在Pod <code>kubia-manual</code>上添加一个注解</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl annotate pod kubia-manual mycompany.com/someannotation=<span class="string">"foo bar"</span></span></span><br><span class="line">pod/kubia-manual annotated</span><br></pre></td></tr></table></figure>
+
+<p>建议使用 mycompany.com/someannotation 格式的key添加注解，以避免 key 的冲突。可以使用 <code>kubectl describe</code>命令查看添加的注解，如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl describe pod kubia-manual</span></span><br><span class="line">Name:         kubia-manual</span><br><span class="line">Namespace:    default</span><br><span class="line">Priority:     0</span><br><span class="line">Node:         minikube/192.168.39.243</span><br><span class="line">Start Time:   Sun, 17 Jan 2021 18:43:25 +0800</span><br><span class="line">Labels:       &lt;none&gt;</span><br><span class="line">Annotations:  mycompany.com/someannotation: foo bar</span><br><span class="line">Status:       Pending</span><br><span class="line">IP:           172.17.0.3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-7-使用命名空间分组资源"><a href="#3-7-使用命名空间分组资源" class="headerlink" title="3.7 使用命名空间分组资源"></a>3.7 使用命名空间分组资源</h2><p>标签可以将资源对象进行分组，由于一个资源对象可以有多个标签，分组是重叠的。使用Kubernetes的命名空间可以将资源分组，且不重叠，在不同的命名空间中，资源可以有相同的名字。使用命名空间可以将资源对象分为不同的环境，比如：开发，测试，线上等。大多数的资源对象都可以使用命名空间，但是有些不能，比如节点资源。</p>
+<p>使用下面的命令查看集群上所有的命名空间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get ns</span></span><br><span class="line">NAME              STATUS   AGE</span><br><span class="line">default           Active   3h29m</span><br><span class="line">kube-node-lease   Active   3h30m</span><br><span class="line">kube-public       Active   3h30m</span><br><span class="line">kube-system       Active   3h30m</span><br></pre></td></tr></table></figure>
+
+<p>当使用命令<code>kubectl get</code>查看资源，且没有指定命名空间的话，Kubernetes 默认使用<code>default</code>命名空间，只显示在<code>default</code>空间里面的资源。可以显示指定命名空间，如下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get po --namespace kube-system</span></span><br><span class="line">NAME                               READY   STATUS    RESTARTS   AGE</span><br><span class="line">coredns-f9fd979d6-d82n9            1/1     Running   0          3h33m</span><br><span class="line">etcd-minikube                      1/1     Running   0          3h33m</span><br><span class="line">kube-apiserver-minikube            1/1     Running   0          3h33m</span><br><span class="line">kube-controller-manager-minikube   1/1     Running   1          3h34m</span><br><span class="line">kube-proxy-btfdr                   1/1     Running   0          3h33m</span><br><span class="line">kube-scheduler-minikube            1/1     Running   0          3h33m</span><br></pre></td></tr></table></figure>
+
+<p>命名空间可以隔离资源，避免误操作，也使得资源可以更加有效管理。除了隔离资源，命名空间还有其他作用，后面章节会介绍。</p>
+<p>命名空间也是一种Kubernetes资源，在YAML文件里面可以指定，如下面例子</p>
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210117220820299.png" alt="image-20210117220820299" style="zoom:50%;" />
+
+<p>使用下面的命令创建命名空间资源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl create -f custom-namespace.yaml</span></span><br><span class="line">namespace/custom-namespace created</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过<code>kubectl create namespace</code>命令直接创建命名空间，如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl create namespace custom-namespace</span></span><br></pre></td></tr></table></figure>
+
+<p>在特定的命名空间创建资源，可以在YAML文件的<code>metadata</code>部分下面添加<code>namespace: custom- namespace</code>一项，或者直接在使用命令的时候指定命名空间，如下所示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl create -f kubia-manual.yaml -n custom-namespace</span></span><br><span class="line">pod/kubia-manual created</span><br></pre></td></tr></table></figure>
+
+<p>在某些命名空间对资源进行查看，修改，删除等操作时候，需要在命令中使用<code>--namespace (or -n)</code>标志指定命名空间，否则的话Kubernetes使用默认的命名空间（Kubernetes的默认配置可以通过<code>kubectl config</code>命令修改）。如下面的例子</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods  <span class="comment"># 默认命令空间</span></span></span><br><span class="line">NAME           READY   STATUS    RESTARTS   AGE</span><br><span class="line">kubia-dmckq    1/1     Running   0          3h35m</span><br><span class="line">kubia-l2mdl    1/1     Running   0          3h35m</span><br><span class="line">kubia-manual   1/1     Running   0          3h36m</span><br><span class="line">kubia-zs8hz    1/1     Running   0          3h35m</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods -n custom-namespace</span></span><br><span class="line">NAME           READY   STATUS    RESTARTS   AGE</span><br><span class="line">kubia-manual   1/1     Running   0          110s</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：命名空间不提供对正在运行对象的任何隔离，例如在不同命名空间里面的Pod是可以互相通行的</strong></p>
+<h2 id="3-8-停止和删除Pods"><a href="#3-8-停止和删除Pods" class="headerlink" title="3.8 停止和删除Pods"></a>3.8 停止和删除Pods</h2><p>可以直接通过Pod的名字删除Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete po kubia-gpu  <span class="comment"># 可以删除多个Pod，通过空格分开 kubectl delete po pod1 pod2</span></span></span><br></pre></td></tr></table></figure>
+
+<p>上述的命令指示Kubernetes终止在删除Pod里面的所有容器。Kubernetes给进程发<code>SIGTERM</code>信号，然后等待一定的时间（默认30s）优雅地删除。如果在等待的时间里没有删除，那么进程会被杀掉通过<code>SIGKILL</code>信号，为了确保进程优雅地退出，需要合理地处理<code>SIGTERM</code>命令。</p>
+<p>也可以通过标签选择器来删除Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete po -l rel=canary</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://muyi110.github.io/shanliu.github.io/images/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0//image-20210117224603607.png" alt="image-20210117224603607" style="zoom:50%;" />
+
+<p>也可以删除整个命名空间，进而自动删除里面所有的Pod</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete ns custom-namespace</span></span><br></pre></td></tr></table></figure>
+
+<p>可以删除命名空间里面的所有Pod，但是保留命令空间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete po --all</span></span><br></pre></td></tr></table></figure>
+
+<p>删除命令空间里面的所有资源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete all --all  <span class="comment"># 指定all实际不能删除所有的资源，比如Secrets就需要显示指定删除</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-Replication-And-other-controllers：部署托管的Pods"><a href="#4-Replication-And-other-controllers：部署托管的Pods" class="headerlink" title="4 Replication And other controllers：部署托管的Pods"></a>4 Replication And other controllers：部署托管的Pods</h1>
       
     </div>
 
