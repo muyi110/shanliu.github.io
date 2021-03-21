@@ -156,6 +156,165 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://muyi110.github.io/shanliu.github.io/2021/Centos7%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/shanliu.github.io/images/wukong.png">
+      <meta itemprop="name" content="山柳">
+      <meta itemprop="description" content="既已无岸，不必回头，唯有向前，踏碎云霄，放肆桀骜">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山柳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/shanliu.github.io/2021/Centos7%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Centos7系统安装配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-13 15:28:06" itemprop="dateCreated datePublished" datetime="2021-03-13T15:28:06+08:00">2021-03-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-20 17:46:26" itemprop="dateModified" datetime="2021-03-20T17:46:26+08:00">2021-03-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/shanliu.github.io/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>此博客记录电脑安装Centos7系统（无GUI）一些初始化配置</p>
+</blockquote>
+<h1 id="U盘制作Centos7系统启动盘"><a href="#U盘制作Centos7系统启动盘" class="headerlink" title="U盘制作Centos7系统启动盘"></a>U盘制作Centos7系统启动盘</h1><h2 id="Mac系统制作启动盘"><a href="#Mac系统制作启动盘" class="headerlink" title="Mac系统制作启动盘"></a>Mac系统制作启动盘</h2><ol>
+<li><p>将U盘插入电脑，输入命令<code>diskutil list</code>查看相关挂载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> diskutil list</span></span><br><span class="line">/dev/disk0 (internal, physical):</span><br><span class="line"><span class="meta">   #</span><span class="bash">:                       TYPE NAME                    SIZE       IDENTIFIER</span></span><br><span class="line">   0:      GUID_partition_scheme                        *500.3 GB   disk0</span><br><span class="line">   1:                        EFI EFI                     314.6 MB   disk0s1</span><br><span class="line">   2:                 Apple_APFS Container disk1         500.0 GB   disk0s2</span><br><span class="line"></span><br><span class="line">/dev/disk1 (synthesized):</span><br><span class="line"><span class="meta">   #</span><span class="bash">:                       TYPE NAME                    SIZE       IDENTIFIER</span></span><br><span class="line">   0:      APFS Container Scheme -                      +500.0 GB   disk1</span><br><span class="line">                                 Physical Store disk0s2</span><br><span class="line">   1:                APFS Volume Macintosh HD            11.3 GB    disk1s1</span><br><span class="line">   2:                APFS Volume Macintosh HD - Data     87.0 GB    disk1s2</span><br><span class="line">   3:                APFS Volume Preboot                 81.9 MB    disk1s3</span><br><span class="line">   4:                APFS Volume Recovery                528.9 MB   disk1s4</span><br><span class="line">   5:                APFS Volume VM                      1.1 GB     disk1s5</span><br><span class="line"></span><br><span class="line">/dev/disk2 (external, physical):</span><br><span class="line"><span class="meta">   #</span><span class="bash">:                       TYPE NAME                    SIZE       IDENTIFIER</span></span><br><span class="line">   0:     FDisk_partition_scheme                        *15.6 GB    disk2</span><br><span class="line">   1:                       0xEF                         9.0 MB     disk2s2</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>/dev/disk2</code>表示插入的U盘</p>
+</li>
+<li><p>不挂载U盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> diskutil unmountDisk /dev/disk2</span></span><br><span class="line">Unmount of all volumes on disk2 was successful</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始制作启动盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo dd <span class="keyword">if</span>=CentOS-7-x86_64-Minimal-2009.iso of=/dev/disk2 bs=1m</span></span><br><span class="line">Password:</span><br><span class="line">973+0 records in</span><br><span class="line">973+0 records out</span><br><span class="line">1020264448 bytes transferred in 513.309363 secs (1987621 bytes/sec)</span><br></pre></td></tr></table></figure>
+
+<p>此过程需要等待几分钟</p>
+</li>
+<li><p>安装系统</p>
+</li>
+</ol>
+<h1 id="Centos7系统配置"><a href="#Centos7系统配置" class="headerlink" title="Centos7系统配置"></a>Centos7系统配置</h1><h2 id="配置有线网络"><a href="#配置有线网络" class="headerlink" title="配置有线网络"></a>配置有线网络</h2><ol>
+<li><p>查看本机网卡</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> nmcli d</span></span><br><span class="line">DEVICE  TYPE      STATE   CONNECTION</span><br><span class="line">p4p1    ethernet  已连接  p4p1</span><br><span class="line">wlp2s0  wifi      不可用  --</span><br><span class="line">lo      loopback  未托管  --</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入目录<code>/etc//sysconfig/network-scripts</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> /etc/sysconfig/network-scripts/</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ls</span></span><br><span class="line">ifcfg-lo     ifdown-ippp  ifdown-routes    ifup          ifup-ipv6   ifup-ppp       ifup-tunnel</span><br><span class="line">ifcfg-p4p1   ifdown-ipv6  ifdown-sit       ifup-aliases  ifup-isdn   ifup-routes    ifup-wireless</span><br><span class="line">ifdown       ifdown-isdn  ifdown-Team      ifup-bnep     ifup-plip   ifup-sit       init.ipv6-global</span><br><span class="line">ifdown-bnep  ifdown-post  ifdown-TeamPort  ifup-eth      ifup-plusb  ifup-Team      network-functions</span><br><span class="line">ifdown-eth   ifdown-ppp   ifdown-tunnel    ifup-ippp     ifup-post   ifup-TeamPort  network-functions-ipv6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开<code>ifcfg-p4p1</code>文件，修改如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@192 ~]# vi ifcfg-p4p1</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=dhcp   # 这里修改</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=p4p1</span><br><span class="line">UUID=6f2067d2-d31e-4b74-ad93-51e0ca294b01</span><br><span class="line">DEVICE=p4p1</span><br><span class="line">ONBOOT=yes      # 这里修改</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@192 ~]# systemctl restart network</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="配置无线网络（失败）"><a href="#配置无线网络（失败）" class="headerlink" title="配置无线网络（失败）"></a>配置无线网络（失败）</h2><ol>
+<li><p>将刚刚安装系统的U盘在插回电脑</p>
+</li>
+<li><p>将U盘挂载到<code>/mnt/</code>目录，或者其他自定义目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@192 ~]# mount /dev/sdb /mnt/</span><br><span class="line">[root@192 ~]# ls /mnt/</span><br><span class="line">CentOS_BuildTag  EULA  images    LiveOS    repodata              RPM-GPG-KEY-CentOS-Testing-7</span><br><span class="line">EFI              GPL   isolinux  Packages  RPM-GPG-KEY-CentOS-7  TRANS.TBL</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看<code>Manager-wifi</code>全名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@192 ~]# ls /mnt/Packages/ | grep Manager-wifi</span><br><span class="line">NetworkManager-wifi-1.18.8-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装<code>NetworkManager-wifi-1.18.8-1.el7.x86_64.rpm</code>包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@192 ~]# rpm -ivh /mnt/Packages/NetworkManager-wifi-1.18.8-1.el7.x86_64.rpm</span><br><span class="line">准备中...                          ################################# [100%]</span><br><span class="line">	软件包 NetworkManager-wifi-1:1.18.8-1.el7.x86_64 已经安装</span><br></pre></td></tr></table></figure>
+
+<p>同理安装<code>wpa_supplicant-xxx-xxx.x86_64.rpm</code></p>
+</li>
+<li><p>推出U盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@192 ~]# umount /mnt/</span><br><span class="line">[root@192 ~]# eject /dev/sdb</span><br><span class="line">[root@192 ~]# reboot</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接<code>wifi</code>（没有成功）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@192 ~]# nmcli dev wifi</span><br><span class="line">IN-USE  SSID  MODE  CHAN  RATE  SIGNAL  BARS  SECURITY</span><br><span class="line">[root@192 ~]# nmcli dev wifi connect WIFI名称 password WIFI密码</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="配置无线网络"><a href="#配置无线网络" class="headerlink" title="配置无线网络"></a>配置无线网络</h2><ol>
+<li><p>执行下面命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> nmcli d</span></span><br><span class="line">DEVICE  TYPE      STATE   CONNECTION</span><br><span class="line">p4p1    ethernet  已连接  p4p1</span><br><span class="line">wlp2s0  wifi      不可用  --</span><br><span class="line">lo      loopback  未托管  --</span><br><span class="line"><span class="meta">#</span><span class="bash"> ip link <span class="built_in">set</span> wlp2s0 up</span></span><br><span class="line">RTNETLINK answers: Operation not possible due to RF-kill</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按下<code>Fn+F2</code>继续执行<code>ip link set wlp2s0 up</code>成功</p>
+</li>
+<li><p>连接<code>wifi</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> nmcli dev wifi connect wifi_name password wifi_password</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nmcli dev wifi <span class="comment"># 查看wifi信息</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="控制台字体及颜色设置"><a href="#控制台字体及颜色设置" class="headerlink" title="控制台字体及颜色设置"></a>控制台字体及颜色设置</h2><ol>
+<li>默认控制台字体太小，查看系统字体</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@centos7 ~]$ ls /lib/kbd/consolefonts/</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>选择字体<code>sun12x22</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos7 ~]$ echo "setfont sun12x22" &gt;&gt; /etc/profile</span><br><span class="line">[root@centos7 ~]$ source /etc/profile  # 生效</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>控制台提示符设置颜色（青绿色）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@centos7 ~]$ vi .bashrc   # 添加下面一行</span><br><span class="line">PS1="\[\e[36;40m\][\u@\h \W]\$ \[\e[0m\]"</span><br><span class="line">[root@centos7 ~]$ source .bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看终端颜色配置方案，并配置为<code>xterm</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/profile</span></span><br><span class="line">在最后添加  export TERM=xterm</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> /ets/profile</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://muyi110.github.io/shanliu.github.io/2020/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -187,7 +346,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-17 23:07:59" itemprop="dateModified" datetime="2021-01-17T23:07:59+08:00">2021-01-17</time>
+                <time title="修改时间：2021-01-30 22:14:55" itemprop="dateModified" datetime="2021-01-30T22:14:55+08:00">2021-01-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -645,7 +804,16 @@
 <p>删除命令空间里面的所有资源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl delete all --all  <span class="comment"># 指定all实际不能删除所有的资源，比如Secrets就需要显示指定删除</span></span></span><br></pre></td></tr></table></figure>
 
-<h1 id="Replication-And-other-controllers：部署托管的Pods"><a href="#Replication-And-other-controllers：部署托管的Pods" class="headerlink" title="Replication And other controllers：部署托管的Pods"></a>Replication And other controllers：部署托管的Pods</h1>
+<h1 id="Replication-And-other-controllers：部署托管的Pods"><a href="#Replication-And-other-controllers：部署托管的Pods" class="headerlink" title="Replication And other controllers：部署托管的Pods"></a>Replication And other controllers：部署托管的Pods</h1><h2 id="保持Pods健康"><a href="#保持Pods健康" class="headerlink" title="保持Pods健康"></a>保持Pods健康</h2><p>使用Kubernetes最主要的好处是可以使得容器在集群上自动运行。当一个Pod被调度到一个节点上，节点上的Kubelte会运行此Pod的容器，并且只要Pod存在，会使得里面的容器一直运行（如果Pod里面的容器挂了，Kubelte会重启容器）。当容器里面的程序有问题，容器本身正常（主进程还在），<strong>可以在程序内部捕获这种异常情况，使得容器退出，进而利用Kubernetes重启容器</strong>。但是，如果程序进入死循环或者死锁，需要在外面检查程序的健康情况了。</p>
+<p>存活探针</p>
+<p>Kubernetes可以通过存活探针检查一个容器是否活着，可以给Pod里面的每一个容器指定存活探针，Kubernetes可以周期性执行探测，如果探测失败会重启容器。</p>
+<p>Kubernetes有3种方式探测一个容器：</p>
+<ul>
+<li>HTTP GET 探测：在指定的容器IP，端口和路径执行HTTP GET请求，如果收到一个非错误的响应，则认为探测成功，否则认为失败，容器会被重启；</li>
+<li>TCP Socker探测：向指定的容器端口建立一个TCP连接，如果连接被成功建立则成功，否则容器被重启；</li>
+<li><em>Exec</em> 探测：在容器里面执行任意一个命令，退出码为0表示探测成功，否则失败，容器被重启；</li>
+</ul>
+
       
     </div>
 
@@ -949,7 +1117,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/shanliu.github.io/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
